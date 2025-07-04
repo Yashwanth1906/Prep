@@ -215,4 +215,22 @@ void unionByRank(int i, int j) {
 
 RABIN KARP:
 
-Don’t forget to learn……
+
+- Using Hash Function (black box)
+- compute the  hash functions for both the pattern.  and the text . But for the text the hash value is computed only for the m size which is the pattern size.
+- HASH FUNCTION : p, mod
+            do s = "abc" => ((a * p^0) + (b * p^1) + ... ) % mod
+- computing for text.
+    s = "abcdefg" pattern = def
+    so . step 1 : (a * p0) + (b * p1) + (c * p2)
+         step 2 : (b * p1) + (c * p2) + (d * p3)
+         and so on
+
+
+## Tarjan Algorithm
+
+- It is used to find the critical connection or a bridge i.e A connection if it is removed breaks a graph into two or more components.
+- 
+
+## Rabin Karp
+
