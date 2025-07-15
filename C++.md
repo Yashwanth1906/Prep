@@ -77,3 +77,10 @@ SET FUNCTIONS:
 
 - `s.swap(s2)`
 - `s.emplace(x)` – insert using in-place construction (like insert, but more efficient)
+
+
+### Important NOTES:
+
+- ASCII VALUES : 0 - 9 -> 48 - 57
+- ASCII VALUES : a - z -> 97 - 122
+- ASCII VALUES : a - z -> 65 - 90
