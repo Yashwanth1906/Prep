@@ -84,3 +84,51 @@ SET FUNCTIONS:
 - ASCII VALUES : 0 - 9 -> 48 - 57
 - ASCII VALUES : a - z -> 97 - 122
 - ASCII VALUES : a - z -> 65 - 90
+
+
+## Dangling Pointers:
+
+- A dangling pointer in C++ is a pointer that still holds the address of a memory location that has already been freed or is no longer valid.Using a dangling pointer leads to undefined behavior — your program might crash, produce wrong results, or even seem to work sometimes (which is worse).
+
+How Dangling Pointers Happen
+
+1. Deleting memory but still keeping the pointer
+#include <iostream>
+using namespace std;
+
+int main() {
+    int* ptr = new int(10);
+    delete ptr;   // Memory freed
+    // ptr still holds the old address — now dangling
+
+    cout << *ptr; // ❌ Undefined behavior
+}
+
+2. Pointer to a local variable (goes out of scope)
+
+int* getPointer() {
+    int x = 42;    // Stored on stack
+    return &x;     // Returning address of local variable ❌
+}                  // x is destroyed when function ends
+
+int main() {
+    int* p = getPointer();
+    cout << *p;    // ❌ Dangling pointer
+}
+
+3. Pointer to an object that has been destroyed
+
+struct Demo {
+    void show() { cout << "Hello\n"; }
+};
+
+int main() {
+    Demo* p;
+    {
+        Demo d;
+        p = &d;  // Points to object on stack
+    }            // d is destroyed here
+    p->show();   // ❌ Dangling pointer
+}
+
+
