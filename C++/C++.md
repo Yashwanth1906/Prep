@@ -86,6 +86,18 @@ SET FUNCTIONS:
 - ASCII VALUES : a - z -> 65 - 90
 
 
+## MAP FUNCTIONS:
+
+- find() -> to find a key.. != map.end() -> the key is present..
+- erase() -> to remove a key from the map.
+
+## Convert a binary string to decimal value:
+
+- bitset<32>("010").to_ulong();
+
+
+
+
 ## Dangling Pointers:
 
 - A dangling pointer in C++ is a pointer that still holds the address of a memory location that has already been freed or is no longer valid.Using a dangling pointer leads to undefined behavior — your program might crash, produce wrong results, or even seem to work sometimes (which is worse).
@@ -131,4 +143,31 @@ int main() {
     p->show();   // ❌ Dangling pointer
 }
 
+
+
+### unique_ptr , make_sharead, make_unique : 
+
+make_unique vs make_shared vs Raw new
+These are factory functions for creating smart pointers without directly calling new.
+
+| **Function**              | **Purpose**               | **Ownership**                                                                              | **When to Use**                                 |
+| ------------------------- | ------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| `make_unique<T>(args...)` | Creates a `unique_ptr<T>` | **Exclusive ownership** — only one owner allowed                                           | When only one object should manage the resource |
+| `make_shared<T>(args...)` | Creates a `shared_ptr<T>` | **Shared ownership** — multiple owners share resource, deleted when last reference is gone | When multiple objects need shared access        |
+| `new`                     | Creates a raw pointer     | No ownership — must manually `delete`                                                      | Rare in modern C++ (use smart pointers instead) |
+
+
+auto uptr = make_unique<Product>(1, 100, 10, "Red Bull"); 
+auto sptr = make_shared<Product>(2, 50, 10, "Sting");
+
+### Mutex Lock mtx.lock() VS lock_guard<mutex> mtx: 
+
+
+
+| **Aspect**  | **`mtx.lock()` / `mtx.unlock()`**                                                                                            | **`lock_guard<mutex>`**                                                                           |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Control** | You manually call `mtx.lock()` and `mtx.unlock()`                                                                            | Locks automatically when created, unlocks automatically when destroyed                            |
+| **Risk**    | If your function returns early, throws exception, or you forget `mtx.unlock()`, the mutex remains locked → **deadlock risk** | No risk of forgetting to unlock — it’s automatically unlocked when `lock_guard` goes out of scope |
+| **Syntax**  | More verbose and error-prone                                                                                                 | Short, safer                                                                                      |
+| **Example** | `cpp mtx.lock(); /* work */ mtx.unlock();`                                                                                   | `cpp lock_guard<mutex> lock(mtx); /* work */`                                                     |
 
