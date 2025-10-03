@@ -1,5 +1,14 @@
 # C++ notes
 
+## DATA TYPES :
+
+
+- float and double for decimal values, with double providing more precision.
+
+
+
+
+
 VECTOR FUNCTIONS:
 
 ### 🔹 Construction & Assignment
