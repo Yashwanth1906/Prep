@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 class Node {
 public:
     int val, key;
@@ -82,3 +83,78 @@ public:
  * int param_1 = obj->get(key);
  * obj->put(key,value);
  */
+
+class ListNode {
+public:
+  int val, key;
+  ListNode* next;
+  ListNode* prev;
+  ListNode(int value, int key) {
+    this->key = key;
+    this->value = value;
+    next = prev = nullptr;
+  }
+};
+
+
+
+class LRUCache {
+  int capacity;
+  ListNode* head;
+  ListNode* tail;
+  unordered_map<int, ListNode*> cache;
+
+  void addNode(ListNode* node) {
+    node->next = head->next;
+    node->prev = head;
+    head->next->prev = node;
+    head->next = node;
+  }
+
+  void deleteNode(ListNode* node) {
+    node->prev->next = node->next;
+    node->next->prev = node->prev;
+    delete node;
+  }
+
+  LRUCache(int capacity) {
+    head = new ListNode(-1);
+    tail = new ListNode(-1);
+    this->capacity = capacity;
+    head->next = tail;
+    tail->prev = head;
+  }
+
+  int get(int key) {
+    if(cache.find(key) != cache.end()) {
+      int value = node->val;
+      cache.erase(key);
+      deleteNode(node);
+      addNode(node);
+      cache[key] = head->val;
+      return value;
+    }
+    return -1;
+  }
+  void put(int key, int value) {
+    if(cache.find(key) != cache.end()) {
+      ListNode* node = cache[key];
+      cache.erase(node->key);
+      deleteNode(node);
+      ListNode* newNode  = new ListNode(key, value);
+      addNode(newNode);
+      cache[key] = head->next;
+      return;
+    }
+    if(cache.size() == capacity) {
+      ListNode* toDelete = tail->prev;
+      cache.erase(toDelete->key);
+      deleteNode(toDelete);
+      delete toDelete;
+    }
+    ListNode* newNode = new ListNode(key, value);
+    addNode(newNode);
+    cache[key] = head->next;
+    return;
+  }
+};

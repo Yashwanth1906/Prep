@@ -31,5 +31,5 @@ int main() {
     cin>>a[i];
   }
   build(0,0, n - 1);
-  cout<<query(0,0,n-1,1,4);
+  cout<<query(0,0,n-1,1,4)<<endl;
 }

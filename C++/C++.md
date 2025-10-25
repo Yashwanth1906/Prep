@@ -1,11 +1,27 @@
 # C++ notes
 
+## Write functions inside functions (Like arrrow functions) :
+
+- syntax:
+
+  function<return_type(params_datatype)> func_name = [&](params){
+      func_body;
+  }
+
+
+  auto func_name = [&](params) {}
+
+  - [] inside this we need to specify all the variables and data that we needed from the outer function. & -> will take all the variables as reference , = -> will take all the variables as copy.
+
+  - () -> inside this specify all the datatypes;
+  - return_type is the return_type of the function.
+  -
+
+
 ## DATA TYPES :
 
 
 - float and double for decimal values, with double providing more precision.
-
-
 
 
 

@@ -19,7 +19,7 @@ public:
         }
     }
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& conn) {
-        for(auto -0poppppppppppppppp[pit : conn) {
+        for(auto [pit : conn) {
             graph[it[0]].push_back(it[1]);
             graph[it[1]].push_back(it[0]);
         }
